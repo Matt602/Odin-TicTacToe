@@ -11,29 +11,41 @@ body, html {
 #left-side {
     margin-top: 50px;
     margin-left: 150px;
+    width: 600px;
+    height: 600px;
+    background-color: #34495e;
+    color: #fff;
+    border: 6px solid #2c3e50;
+    border-radius: 10px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    height: 300px;
-    width: 300px;
-    justify-items: center;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+
+}
+
+
+.cell {
+    border: 6px solid #2c3e50;
+    border-radius: 2px;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 4em;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-#right-side {
-    margin: 100px 0px 0px 150px;
-}
-
-.cell {
-    border-style: solid;
-    border-color: black;
-    padding: 40px;
-    font-size: 50px;
-}
 
 .cell:hover {
     background-color: rgb(240, 235, 235);
     
 }
+
+
+
+#right-side {
+    margin: 100px 0px 0px 150px;
+}
+
 
 .winner {
     font-size: 30px;

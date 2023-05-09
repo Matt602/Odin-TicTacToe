@@ -1,10 +1,10 @@
-const Player = function(name, symbol) {
-    return { name, symbol}
+const Player = function(name, symbol, turn) {
+    return { name, symbol, turn}
 };
 
 const GameBoard = (() => {
     let arr = ['O', 'X', 'O', 'X', 'O', 'X', 'X', 'O', 'X']
-    const checkGameOver = function(player1.symbol, player2.symbol) {
+    const checkGameOver = function() {
         if( (arr[0] === arr[1] === arr[2]) )
         {
             return arr[0];
@@ -47,9 +47,28 @@ const GameBoard = (() => {
         arr[pos] = symbol;
     };
 
-    return { arr, checkGameOver, placeSymbol}
+    const clear = function() {
+        for(let i = 0; i < 9; i++)
+        {
+            arr[i] = ' ';
+        }
+    };
+
+    const test = "Hello worls";
+
+    return { arr, 
+             checkGameOver, 
+             placeSymbol, 
+             clear,
+            test, 
+        }
 })();
 
 const DisplayController = (() => {
+    const cButton = document.querySelector('#start-button');
+
+    cButton.addEventListener('click', () => {
+        console.log(GameBoard.test);
+    });
 
 })();
