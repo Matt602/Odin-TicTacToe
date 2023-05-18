@@ -54,13 +54,11 @@ const GameBoard = (() => {
         }
     };
 
-    const test = "Hello worls";
 
     return { arr, 
              checkGameOver, 
              placeSymbol, 
              clear,
-            test, 
         }
 })();
 
@@ -68,7 +66,16 @@ const DisplayController = (() => {
     const cButton = document.querySelector('#start-button');
 
     cButton.addEventListener('click', () => {
-        console.log(GameBoard.test);
+        const cells = document.querySelectorAll('.cell');
+
+        cells.forEach((cell) => {
+
+            const val = cell.getAttribute('data-value');
+
+            cell.textContent = GameBoard.arr[val];
+
+        });
     });
 
 })();
+
