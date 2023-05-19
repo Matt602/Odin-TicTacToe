@@ -3,7 +3,7 @@ const Player = function(name, symbol, turn) {
 };
 
 const GameBoard = (() => {
-    let arr = ['O', 'X', 'O', 'X', 'O', 'X', 'X', 'O', 'X']
+    let arr = ['', '', '', '', '', '', '', '', '']
     const checkGameOver = function() {
         if( (arr[0] === arr[1] === arr[2]) )
         {
@@ -77,5 +77,14 @@ const DisplayController = (() => {
         });
     });
 
+
 })();
 
+
+const cells = document.querySelectorAll('.cell');
+
+cells.forEach( (cell) => {
+    cell.addEventListener('click', () => {
+        GameBoard.placeSymbol('X', cell.getAttribute('data-value'));
+    });
+});
