@@ -65,8 +65,9 @@ const GameBoard = (() => {
 const DisplayController = (() => {
     const cButton = document.querySelector('#start-button');
 
-    cButton.addEventListener('click', () => {
-        const cells = document.querySelectorAll('.cell');
+    const cells = document.querySelectorAll('.cell');
+
+    const populateBoard = function() {
 
         cells.forEach((cell) => {
 
@@ -75,16 +76,32 @@ const DisplayController = (() => {
             cell.textContent = GameBoard.arr[val];
 
         });
+
+    };
+
+    const setEventCells = function() {
+
+        cells.forEach( (cell) => {
+            cell.addEventListener('click', () => {
+                if(p1.turn)
+                {
+                    GameBoard.placeSymbol('X', cell.getAttribute('data-value'));
+                }
+                else
+                {
+                    GameBoard.placeSymbol('O', cell.getAttribute('data-value'));
+                }
+                
+            });
+        });
+
+    };
+
+    cButton.addEventListener('click', () => {
+
+        setEventCells();
     });
 
 
 })();
 
-
-const cells = document.querySelectorAll('.cell');
-
-cells.forEach( (cell) => {
-    cell.addEventListener('click', () => {
-        GameBoard.placeSymbol('X', cell.getAttribute('data-value'));
-    });
-});
