@@ -3,37 +3,40 @@ const Player = function(name, symbol, turn) {
 };
 
 const GameBoard = (() => {
-    let arr = ['', '', '', '', '', '', '', '', '']
+    const arr = ['', '', '', '', '', '', '', '', ''];
     const checkGameOver = function() {
-        if( (arr[0] === arr[1] === arr[2]) )
+
+        
+
+        if(((arr[0] === arr[1]) && (arr[1] === arr[2]) && (arr[0] === 'X')) || ((arr[0] === arr[1]) && (arr[1] === arr[2]) && (arr[0] === 'O')))
         {
             return arr[0];
         }
-        else if ( (arr[3] === arr[4] === arr[5]) )
+        else if (((arr[3] === arr[4]) && (arr[4] === arr[5]) && (arr[3] === 'X')) || ((arr[3] === arr[4]) && (arr[4] === arr[5]) && (arr[3] === 'O')))
         {
             return arr[3];
         }
-        else if ( (arr[6] === arr[7] === arr[8]) )
+        else if (((arr[6] === arr[7]) && (arr[7] === arr[8]) && (arr[6] === 'X')) || ((arr[6] === arr[7]) && (arr[7] === arr[8]) && (arr[6] === 'O')))
         {
             return arr[6];
         }
-        else if ( (arr[0] === arr[3] === arr[6]) )
+        else if (((arr[0] === arr[3]) && (arr[3] === arr[6]) && (arr[0] === 'X')) || ((arr[0] === arr[3]) && (arr[3] === arr[6]) && (arr[0] === 'O')))
         {
             return arr[0];
         }
-        else if ( (arr[1] === arr[4] === arr[7]) )
+        else if (((arr[1] === arr[4]) && (arr[4] === arr[7]) && (arr[1] === 'X')) || ((arr[1] === arr[4]) && (arr[4] === arr[7]) && (arr[1] === 'O')))
         {
             return arr[1];
         }
-        else if ( (arr[2] === arr[5] === arr[8]) )
+        else if (((arr[2] === arr[5]) && (arr[5] === arr[8]) && (arr[2] === 'X')) || ((arr[2] === arr[5]) && (arr[5] === arr[8]) && (arr[2] === 'O')))
         {
             return arr[2];
         }
-        else if ( (arr[0] === arr[4] === arr[8]) )
+        else if (((arr[0] === arr[4]) && (arr[4] === arr[8]) && (arr[0] === 'X')) || ((arr[0] === arr[4]) && (arr[4] === arr[8]) && (arr[0] === 'O')))
         {
             return arr[0];
         }
-        else if ( (arr[2] === arr[4] === arr[6]) )
+        else if (((arr[2] === arr[4]) && (arr[4] === arr[6]) && (arr[2] === 'X')) || ((arr[2] === arr[4]) && (arr[4] === arr[6]) && (arr[2] === 'O')))
         {
             return arr[2];
         }
@@ -85,11 +88,42 @@ const DisplayController = (() => {
             cell.addEventListener('click', () => {
                 if(p1.turn)
                 {
-                    GameBoard.placeSymbol('X', cell.getAttribute('data-value'));
+                    if(GameBoard.arr[cell.getAttribute('data-value')] === '')
+                    {
+                        GameBoard.placeSymbol(p1.symbol, cell.getAttribute('data-value'));
+                        populateBoard();
+                        p1.turn = false;
+                        p2.turn = true;
+                    }
                 }
                 else
                 {
-                    GameBoard.placeSymbol('O', cell.getAttribute('data-value'));
+                    if(GameBoard.arr[cell.getAttribute('data-value')] === '')
+                    {
+                        GameBoard.placeSymbol(p2.symbol, cell.getAttribute('data-value'));
+                        populateBoard();
+                        p1.turn = true;
+                        p2.turn = false;
+                    }
+                    
+                }
+
+                if( GameBoard.checkGameOver() !== '')
+                {
+                    if(GameBoard.checkGameOver() === 'X')
+                    {
+                        winner(p1.name);
+                    }
+                    else
+                    {
+                        winner(p2.name);
+                    }
+                   
+                }
+
+                if(checkEmptySpace() === 0)
+                {
+                    tie();
                 }
                 
             });
@@ -104,4 +138,32 @@ const DisplayController = (() => {
 
 
 })();
+
+const checkEmptySpace = () => {
+    let count = 9;
+
+    for(let i = 0; i < 9; i++)
+    {
+        if(GameBoard.arr[i] !== '')
+        {
+            count--;
+        }
+    }
+    return count;
+};
+
+const tie = () => {
+    const htmlElement = document.querySelector('.winner');
+    htmlElement.textContent = 'Tie. No winner';
+};
+
+const winner = (name) => {
+    const htmlElement2 = document.querySelector('.winner');
+    htmlElement2.textContent = name + ' is the winner!';
+};
+
+const p1 = Player('Player 1', 'X', true);
+const p2 = Player('Player 2', 'O', false);
+
+
 
