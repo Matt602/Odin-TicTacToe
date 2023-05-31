@@ -57,11 +57,25 @@ const GameBoard = (() => {
         }
     };
 
+    const checkEmptySpace = () => {
+        let count = 9;
+    
+        for(let i = 0; i < 9; i++)
+        {
+            if(GameBoard.arr[i] !== '')
+            {
+                count--;
+            }
+        }
+        return count;
+    };
+
 
     return { arr, 
              checkGameOver, 
              placeSymbol, 
              clear,
+             checkEmptySpace,
         }
 })();
 
@@ -132,7 +146,7 @@ const DisplayController = (() => {
                    
                 }
 
-                if(checkEmptySpace() === 0)
+                if(GameBoard.checkEmptySpace() === 0)
                 {
                     tie();
                 }
@@ -150,18 +164,7 @@ const DisplayController = (() => {
 
 })();
 
-const checkEmptySpace = () => {
-    let count = 9;
 
-    for(let i = 0; i < 9; i++)
-    {
-        if(GameBoard.arr[i] !== '')
-        {
-            count--;
-        }
-    }
-    return count;
-};
 
 
 
