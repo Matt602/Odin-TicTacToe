@@ -82,6 +82,17 @@ const DisplayController = (() => {
 
     };
 
+
+    const tie = () => {
+        const htmlElement = document.querySelector('.winner');
+        htmlElement.textContent = 'Tie. No winner';
+    };
+    
+    const winner = (name) => {
+        const htmlElement2 = document.querySelector('.winner');
+        htmlElement2.textContent = name + ' is the winner!';
+    };
+
     const setEventCells = function() {
 
         cells.forEach( (cell) => {
@@ -152,15 +163,7 @@ const checkEmptySpace = () => {
     return count;
 };
 
-const tie = () => {
-    const htmlElement = document.querySelector('.winner');
-    htmlElement.textContent = 'Tie. No winner';
-};
 
-const winner = (name) => {
-    const htmlElement2 = document.querySelector('.winner');
-    htmlElement2.textContent = name + ' is the winner!';
-};
 
 const p1 = Player('Player 1', 'X', true);
 const p2 = Player('Player 2', 'O', false);
