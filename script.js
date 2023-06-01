@@ -53,7 +53,7 @@ const GameBoard = (() => {
     const clear = function() {
         for(let i = 0; i < 9; i++)
         {
-            arr[i] = ' ';
+            arr[i] = '';
         }
     };
 
@@ -107,6 +107,12 @@ const DisplayController = (() => {
         htmlElement2.textContent = name + ' is the winner!';
     };
 
+    const eraseWinner = () => {
+        const htmlElement2 = document.querySelector('.winner');
+        htmlElement2.textContent = name + '';
+    };
+
+
     const setEventCells = function() {
 
         cells.forEach( (cell) => {
@@ -157,7 +163,10 @@ const DisplayController = (() => {
     };
 
     cButton.addEventListener('click', () => {
-
+        GameBoard.clear();
+        GameController.turn = 1;
+        eraseWinner();
+        populateBoard();
         setEventCells();
     });
 
