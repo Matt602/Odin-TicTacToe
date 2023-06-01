@@ -136,10 +136,12 @@ const DisplayController = (() => {
                     if(GameBoard.checkGameOver() === 'X')
                     {
                         winner(GameController.p1.name);
+                        return;
                     }
                     else
                     {
                         winner(GameController.p2.name);
+                        return;
                     }
                    
                 }
@@ -167,18 +169,29 @@ const GameController = (() => {
 
     let turn = 1;
 
+    let name1 = 'Sean';
+    let name2 = 'Joe';
+    
+    function getNames(a, b)
+    {
+        name1 = a;
+        name2 = b;
+
+        
+    };
+
     
 
-    const p1 = Player('Sean', 'X')
+    let p1 = Player(name1, 'X')
 
-    const p2 = Player('Joe', 'O');
+    let p2 = Player(name2, 'O');
 
 
-    return { turn, p1, p2 }
+    return { turn, p1, p2, getNames }
 
 })();
 
-
+GameController.getNames('Sean', 'Joe');
 
 
 
