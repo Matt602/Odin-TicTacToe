@@ -1,5 +1,5 @@
-const Player = function(name, symbol, turn) {
-    return { name, symbol, turn}
+const Player = function(name, symbol) {
+    return { name, symbol}
 };
 
 const GameBoard = (() => {
@@ -111,24 +111,22 @@ const DisplayController = (() => {
 
         cells.forEach( (cell) => {
             cell.addEventListener('click', () => {
-                if(p1.turn)
+                if(GameController.turn % 2 === 1)
                 {
                     if(GameBoard.arr[cell.getAttribute('data-value')] === '')
                     {
-                        GameBoard.placeSymbol(p1.symbol, cell.getAttribute('data-value'));
+                        GameBoard.placeSymbol(GameController.p1.symbol, cell.getAttribute('data-value'));
                         populateBoard();
-                        p1.turn = false;
-                        p2.turn = true;
+                        GameController.turn++;
                     }
                 }
                 else
                 {
                     if(GameBoard.arr[cell.getAttribute('data-value')] === '')
                     {
-                        GameBoard.placeSymbol(p2.symbol, cell.getAttribute('data-value'));
+                        GameBoard.placeSymbol(GameController.p2.symbol, cell.getAttribute('data-value'));
                         populateBoard();
-                        p1.turn = true;
-                        p2.turn = false;
+                        GameController.turn++;
                     }
                     
                 }
@@ -137,11 +135,11 @@ const DisplayController = (() => {
                 {
                     if(GameBoard.checkGameOver() === 'X')
                     {
-                        winner(p1.name);
+                        winner(GameController.p1.name);
                     }
                     else
                     {
-                        winner(p2.name);
+                        winner(GameController.p2.name);
                     }
                    
                 }
@@ -165,11 +163,22 @@ const DisplayController = (() => {
 })();
 
 
+const GameController = (() => {
+
+    let turn = 1;
+
+    
+
+    const p1 = Player('Sean', 'X')
+
+    const p2 = Player('Joe', 'O');
 
 
+    return { turn, p1, p2 }
 
-const p1 = Player('Player 1', 'X', true);
-const p2 = Player('Player 2', 'O', false);
+})();
+
+
 
 
 
