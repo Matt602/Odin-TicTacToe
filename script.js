@@ -178,16 +178,10 @@ const GameController = (() => {
 
     let turn = 1;
 
-    let name1 = 'Sean';
-    let name2 = 'Joe';
+    let name1 = 'Player 1';
+    let name2 = 'Player 2';
     
-    function getNames(a, b)
-    {
-        name1 = a;
-        name2 = b;
-
-        
-    };
+   
 
     
 
@@ -196,11 +190,21 @@ const GameController = (() => {
     let p2 = Player(name2, 'O');
 
 
-    return { turn, p1, p2, getNames }
+    return { turn, p1, p2, name1, name2, }
 
 })();
 
-GameController.getNames('Sean', 'Joe');
+
+const changeNames = (event) => {
+    event.preventDefault();
+    let name1 = document.getElementById('Player1').value;
+    let name2 = document.getElementById('Player2').value;
+    GameController.p1.name = name1;
+    GameController.p2.name = name2;
+};
+
+
+
 
 
 

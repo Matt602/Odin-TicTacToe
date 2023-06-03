@@ -24,6 +24,14 @@
         <div id="right-side">
             <button id="start-button">Start/Restart</button>
             <div class="winner"></div>
+            <form action="/home/matthew/repos/Odin-TicTacToe" method="POST" id="myForm" type="submit">
+                <label for="Player1">Name for Player 1</label>
+                <input type="text" id="Player1" name="Player1">
+                <br>
+                <label for="Player2">Name for Player 2</label>
+                <input type="text" id="Player2" name="Player2">
+                <button onclick="changeNames(event)">Change names</button>
+            </form>
 
         </div>
     </div>
